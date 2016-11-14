@@ -59,5 +59,5 @@ C:\Program Files (x86)\Microsoft Visual Studio 14.0\VC>
 * [How to: Create and Run an Unattended Installation of Visual Studio](https://msdn.microsoft.com/en-us/library/ee225237.aspx)
 * [Visual Studio Administrator Guide](https://msdn.microsoft.com/en-us/library/ee225238.aspx)
 * [Using Command-Line Parameters to Install Visual Studio](https://msdn.microsoft.com/en-us/library/mt720584.aspx)
-* [vs2015 adminFile 예제 - createAdminfiile 옵션으로 생성한 기본 파일](https://github.com/giseongeom/TIL/blob/master/visual-studio/vs2015_install.xml)
-* [vs2015 adminFile 예제 - C++, F# 설치항목 추가된 파일](https://github.com/giseongeom/TIL/blob/master/visual-studio/example-vs2015_install_20161114.xml)
+* [vs2015 adminFile 예제 - /createAdminfile 옵션으로 생성된 파일](https://github.com/giseongeom/TIL/blob/master/visual-studio/vs2015_install.xml)
+* [vs2015 adminFile 예제 - VC++, F# 설치항목 추가된 파일](https://github.com/giseongeom/TIL/blob/master/visual-studio/example-vs2015_install_20161114.xml)
