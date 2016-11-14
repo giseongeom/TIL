@@ -7,7 +7,9 @@
 ## adminFile 생성
 * D: 드라이브로 Visual Studio Enterprise 2015 .ISO 파일 마운트
 * ``/CreateAdminFile`` 옵션을 이용해서 무인설치 내용을 담고 있는 .xml 파일을 생성
-``d:\vs_enterprise.exe /CreateAdminFile c:\temp\example.xml``
+```
+d:\vs_enterprise.exe /CreateAdminFile c:\temp\example.xml
+```
 
 ## adminFile 수정
 * 생성된 example.xml 파일에서 다음과 같이 수정해 본다. 
