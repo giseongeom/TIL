@@ -34,6 +34,18 @@
   </SelectableItemCustomizations>
 </AdminDeploymentCustomizations>
 ```
+  * 관련되어 [MSDN 도움말](https://msdn.microsoft.com/en-us/library/ee225237.aspx#Anchor_1) 인용
+```
+Sometimes, items listed as selected in the AdminDeployment.xml file do not get installed. 
+To resolve this issue, place the items marked “Selected="yes"” at the end of the AdminDeployment.xml file.
+
+If you don’t want to install the optional dependencies of an item, then you must select the
+parent first and then deselect the optional dependencies after the parent.Another way to do
+ this is to simply omit the optional children of a parent—in other words, do not include 
+any “Selected=”no”” items—but you still must place all the “Selected=”yes”” items at the 
+end of the AdminDeployment.xml file.
+```
+
 
 ## 무인설치
 * ``/passive`` 옵션을 붙이면 진행상황을 구경(?)할 수 있다.
