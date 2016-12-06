@@ -4,13 +4,13 @@
 
 * ``%~dp0`` : 현재 실행중인 스크립트의 폴더 (c:\temp\)
 * ``%~f0``  : 현재 실행중인 스크립트의 전체 경로 (c:\temp\example.cmd)
-  * example.cmd
+* example.cmd
 ```
 @echo off
 echo %%~dp0: %~dp0
 echo %%~f0: %~f0
 ```
-  * example.cmd 실행
+* example.cmd 실행
 ```
 giseong.eom@GISEONG-PC C:\temp
 > example.cmd
@@ -21,7 +21,7 @@ giseong.eom@GISEONG-PC C:\temp
 ### .cmd / .bat 스크립트에서 스크립트 상위의 폴더를 표시
 
 * 위의 예제에서 ``c:\``를 표시하려면 어떻게 해야 할까?
-  * example.cmd 를 다음과 같이 수정
+* example.cmd 를 다음과 같이 수정
 ```
 @echo off
 echo %%~dp0: %~dp0
@@ -29,7 +29,7 @@ echo %%~f0: %~f0
 for %%i in ("%~dp0..") do set "parent=%%~fi"
 echo parent: %parent%
 ```
-  * example.cmd 실행
+* example.cmd 실행
 ```
 giseong.eom@GISEONG-PC C:\temp
 > example.cmd
