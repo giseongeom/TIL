@@ -43,7 +43,7 @@ ami-9c4957f2    2016-04-21T12:49:06.000Z
 ami-eb283685    2016-04-22T10:15:32.000Z
 ami-bfd039de    2016-06-08T04:00:49.000Z
 ```
-    * `reverse` fucntion 이용해서 내림차순 정렬
+  * `reverse` fucntion 이용해서 내림차순 정렬
 ```
 $ aws ec2 describe-images 
     --query "reverse(sort_by(Images, &CreationDate)[*].[ImageId,CreationDate])"
