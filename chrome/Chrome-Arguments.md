@@ -26,9 +26,9 @@ You are using an unsupported command-line flag: --no-sandbox. Stability and secu
 ```
     * 경고 문구까지 감추려면 ``--test-type`` 옵션 사용하면 된다.
     * 최종적으로는 다음과 같이 사용하면 됨
-```
---no-sandbox --test-type
-```
+    ```
+    --no-sandbox --test-type
+    ```
 
 
 
