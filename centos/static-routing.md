@@ -10,19 +10,10 @@ $ more /etc/sysconfig/network-scripts/route-eth0
 172.30.0.0/20 via 10.2.0.3 dev eth0
 ```
 
-
-
-
-
-
-
-
-
-
 ## 참고자료
 
-* 14.4. Configuring Static Routes
-https://www.centos.org/docs/5/html/5.2/Deployment_Guide/s1-networkscripts-static-routes.html
+* [14.4. Configuring Static Routes](https://www.centos.org/docs/5/html/5.2/Deployment_Guide/s1-networkscripts-static-routes.html)
+
 
 
 
