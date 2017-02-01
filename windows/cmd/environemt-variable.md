@@ -1,4 +1,4 @@
-# Environment Variable #
+# Environment Variable 환경변수 #
 
 ## User-level ##
 
@@ -12,6 +12,29 @@
     - `%TEMP%` 변수로 참조되는 폴더도 여기에 위치 - '%LOCALAPPDATA%\Temp'
   - 특정 사용자에 한정해서 설치되는 프로그램의 경우, 이 경로에 프로그램 실행파일을 저장함
   - WSL (Windows Subsystem for Linux)의 리눅스 배포본 파일이 이 경로에 저장됨
+
+
+### 환경변수 추가
+
+* setx 이용
+```
+setx JAVA_HOME C:\APP\java
+```
+
+### 환경변수 삭제
+
+* setx 이용
+환경변수 내용을 삭제 (Variable 자체는 삭제되지 않음. 값만 비워짐)
+```
+setx JAVA_HOME "" 
+```
+
+* 환경변수 내용 + 값 모두 삭제
+```
+REG delete HKCU\Environment /F /V JAVA_HOME
+```
+
+
 
 
 ## 참고자료 ##
