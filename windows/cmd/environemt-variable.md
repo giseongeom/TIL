@@ -40,3 +40,6 @@ REG delete HKCU\Environment /F /V JAVA_HOME
 ## 참고자료 ##
 
 * [Windows Environment Variables](http://ss64.com/nt/syntax-variables.html)
+* [How to Clear Environment Variables Using Setx.exe](http://support.microsoft.com/kb/195050/en-us)
+* [Command line to remove an environment variable from the OS level configuration](
+http://stackoverflow.com/questions/13222724/command-line-to-remove-an-environment-variable-from-the-os-level-configuration)
