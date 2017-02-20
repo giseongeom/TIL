@@ -14,13 +14,20 @@ icacls e:\폴더 /grant "NSFT\user":(OI)(CI)(F) /T /C
 icacls d:\폴더 /grant "BUILTIN\IIS_IUSRS:(OI)(CI)(F)" /T /C 
 icacls d:\폴더 /grant "NT AUTHORITY\IUSR:(OI)(CI)(F)" /T /C 
 ```
+
 * ``Network Service`` 계정
 ```
 icacls d:\폴더 /grant "NT AUTHORITY\NETWORK SERVICE:(OI)(CI)(F)" /T /C 
 ```
+
 * ``Authenticated Users`` (모든 인증된 사용자)
 ```
 icacls d:\폴더 /grant "NT AUTHORITY\Authenticated Users:(OI)(CI)(F)" /T /C 
+```
+
+* ``Everyone`` 모든 사용자 허용
+```
+icacls d:\폴더 /grant "everyone:(OI)(CI)(F)" /T /C 
 ```
 
 ### 보안설정 초기화
@@ -30,6 +37,13 @@ icacls d:\폴더 /grant "NT AUTHORITY\Authenticated Users:(OI)(CI)(F)" /T /C
 icacls d:\폴더\*.* /reset /T /C
 ```
 
-## 기타
+### Powershell 에서 icacls 명령 사용할 때 `--%` 필수
 
-* 2015.08 마지막 갱신
+* 예제
+```
+icacls --% D:\폴더 /grant everyone:(OI)(CI)(F) /T /C 
+```
+
+## 참고자료
+
+* [About Parsing](https://msdn.microsoft.com/en-us/powershell/reference/5.0/microsoft.powershell.core/about/about_parsing)
