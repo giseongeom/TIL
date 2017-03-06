@@ -8,6 +8,14 @@
 
 * 2012.09.07 기준
 
+테스트 플랫폼 | 테스트 결과 | Description
+------------ | ---------- | ----------
+Windows XP Professional with SP3 (32-bit) | failed | 플레이 진행됨 but, 재부팅하면 BSOD 발생
+Windows XP Professional with SP2 (64-bit) | failed | 플레이 불가
+Windows 7 Enterprise with SP1 (64-bit) | passed | 문제없음
+Windows 8 Enterprise RTM (64-bit) | passed | 문제없음
+
+
 ### 설정한 내용
 
 * VMware Tools 설치된 상태에서 아래의 레지스트리 수정
