@@ -23,3 +23,43 @@ USB\ROOT_HUB20\4&304566E4&0                   USB Root Hub
 USB\VID_0408&PID_2FB1\6&252D4A22&0&4          USB Composite Device
 ```
 
+
+
+## RAM
+
+### 메모리 상태(Status) 체크
+
+* 일반 PC
+```powershell
+gwmi -Class CIM_PhysicalMemory `
+  | Select-Object Name, @{Label='Size(GB)';Expression={$_.Capacity/1048576}}, Speed, Status `
+  |ft -Autosize
+
+Name            Size(GB) Speed Status
+----            -------- ----- ------
+Physical Memory     2048  1333
+Physical Memory     2048  1333
+Physical Memory     2048  1333
+Physical Memory     2048  1333
+Physical Memory     2048  1333
+Physical Memory     2048  1333
+Physical Memory     2048  1333
+Physical Memory     2048  1333
+```
+* Dell PowerEdge R510 (Dell OMSA installed)
+```powershell
+gwmi -Namespace root\cimv2\dell -Class CIM_PhysicalMemory `
+ | Select-Object Name, @{Label='Size(GB)';xpression={$_.Capacity/1048576}}, Speed, Status `
+ |ft -Autosize
+
+Name     Size(GB) Speed Status
+----     -------- ----- ------
+DIMM_A1      2048  1333 OK
+DIMM_A2      2048  1333 OK
+DIMM_A3      2048  1333 OK
+DIMM_A4      2048  1333 OK
+DIMM_B1      2048  1333 OK
+DIMM_B2      2048  1333 OK
+DIMM_B3      2048  1333 OK
+DIMM_B4      2048  1333 OK
+```
