@@ -80,3 +80,37 @@ VAGRANT_DEFAULT_PROVIDER=vmware_workstation
 * 기본적인 기능들이 제대로 동작하지 않을 가능성 높음
 * vagrant rdp의 경우 vagrant 사용자로 로그인 불가
 * `.\vagrant`로 지정해주면 로그인됨 (Guest 재부팅하면 문제 해결됨)
+
+### HyperV
+
+* Default provider 설정
+환경 변수 *VAGRANT_DEFAULT_PROVIDER* 설정
+```
+VAGRANT_DEFAULT_PROVIDER=hyperv
+```
+
+* hyperv Provider 소스 수정 (관리자 권한 체크하는 루틴)
+* `c:\HashiCorp\Vagrant\embedded\gems\gems\vagrant-1.5.2\plugins\providers\hyperv\provider.rb` 파일을 수정
+* 소스 내용
+```ruby
+module VagrantPlugins
+  module HyperV
+    class Provider < Vagrant.plugin("2", :provider)
+      attr_reader :driver
+
+      def initialize(machine)
+        @machine = machine
+
+        if !Vagrant::Util::Platform.windows?
+          raise Errors::WindowsRequired
+        end
+
+        #if !Vagrant::Util::Platform.windows_admin?
+        #  raise Errors::AdminRequired
+        #end 
+```
+
+* MSOpenTech의 Hyper-V plugin 설치
+```
+C:\> vagrant plugin install vagrant-windows-hyperv
+```
