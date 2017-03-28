@@ -74,3 +74,9 @@ VAGRANT_DEFAULT_PROVIDER=vmware_workstation
   config.vm.network "forwarded_port", id: "winrm", guest: 5985, host: 55985, disabled: true
 ```
 
+* config.vm.hostname
+    * Windows Guest의 경우 `config.vm.hostname` 이용해서 Hostname 설정 했을 때 문제 발생
+    * 즉 ComputerName 변경되고 재부팅을 안한 상태
+* 기본적인 기능들이 제대로 동작하지 않을 가능성 높음
+* vagrant rdp의 경우 vagrant 사용자로 로그인 불가
+* `.\vagrant`로 지정해주면 로그인됨 (Guest 재부팅하면 문제 해결됨)
