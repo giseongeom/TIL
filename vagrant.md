@@ -290,16 +290,15 @@ UseDNS no
 echo 'UseDNS no' >> /etc/ssh/sshd_config
 ```
 
-* 추가 패키지 설치 
-    * chef
+* chef 패키지 설치 
 ```bash
 $ curl -L https://www.opscode.com/chef/install.sh | sudo bash
 $ chef-client -v
 Chef: 12.0.3
 ```
 
-    * Ubuntu 14.04.1 (32-bit)에서 chef 설치후 오류. 그래서, puppet만 설치함
-    * puppet
+* puppet
+Ubuntu 14.04.1 (32-bit)에서 chef 설치후 오류. 그래서, puppet만 설치함
 ```bash
 $ wget https://apt.puppetlabs.com/puppetlabs-release-pc1-`lsb_release -c -s`.deb
 $ sudo dpkg -i puppetlabs-release-pc1-`lsb_release -c -s`.deb
@@ -410,14 +409,17 @@ winrm set winrm/config/service/auth @{Basic="true"}
 winrm set winrm/config/client @{AllowUnencrypted="true"}
 winrm set winrm/config/client/auth @{Basic="true"}
 ```
+
 * Telnet-Client 설치
 ```
 dism /online /enable-feature:TelnetClient
 ```
+
 * chocolatey 설치
 ```powershell
 powershell -NoProfile -ExecutionPolicy Bypass -Command "iex ((new-object net.webclient).DownloadString('https://chocolatey.org/install.ps1'))" && SET PATH=%PATH%;%ALLUSERSPROFILE%\chocolatey\bin
 ```
+
 * Remote Desktop
     * sconfig 실행
     * Enable RemoteDesktop
@@ -426,7 +428,14 @@ powershell -NoProfile -ExecutionPolicy Bypass -Command "iex ((new-object net.web
 ```
 netsh advfirewall firewall set rule group="remote desktop" new enable=Yes
 ```
+
 * Chef/Puppet 다운로드
+    * Interactive 설치
+    * C:\Windows\Temp\puppet.msi
+    * C:\Windows\Temp\chef.msi
+    * 서비스 시작유형 변경
+    * 파일 삭제
+
 ```powershell
 start powershell -ExecutionPolicy Bypass -command "& {Invoke-WebRequest -Uri https://downloads.puppetlabs.com/windows/puppet-agent-1.2.1-x64.msi -OutFile C:\Windows\Temp\puppet.msi}"
 start powershell -ExecutionPolicy Bypass -command "& {Invoke-WebRequest -Uri https://opscode-omnibus-packages.s3.amazonaws.com/windows/2008r2/x86_64/chef-client-12.4.0-1.msi -OutFile C:\Windows\Temp\chef.msi}
@@ -437,11 +446,6 @@ powershell -ExecutionPolicy Bypass -command "& {Set-Service chef-client -Startup
 del /q /f c:\windows\temp\*.msi
 del /q /f c:\Windows\Temp\sec-config.cfg
 ```
-    * Interactive 설치
-    * C:\Windows\Temp\puppet.msi
-    * C:\Windows\Temp\chef.msi
-    * 서비스 시작유형 변경
-    * 파일 삭제
 
 * 전체작업과정을 정리: [WS2012R2-ServerCore-CreateBox.txt](https://github.com/giseongeom/TIL/blob/master/vagrant/WS2012R2-ServerCore-CreateBox.txt) 참고
 
