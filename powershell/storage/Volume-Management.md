@@ -44,3 +44,21 @@ Format-Volume -Partition (Get-Partition -DiskNumber 1) -FileSystem ReFS -NewFile
 Format-Volume -DriveLetter D -FileSystem ReFS -NewFileSystemLabel D1 -Verbose
 ```
 
+###  Partition 확장
+
+* 확장
+```powershell
+Resize-Partition -DiskNumber 1 -PartitionNumber 1 `
+  -Size (Get-PartitionSupportedSize -DiskNumber 1 -PartitionNumber 1).SizeMax
+```
+
+* 확장된 Partition 확인
+```powershell
+Get-Partition -DiskNumber 1 -PartitionNumber 1
+
+   Disk Number: 1
+
+PartitionNumber  DriveLetter Offset                                        Size Type
+---------------  ----------- ------                                        ---- ----
+1                D           1048576                                  931.51 GB IFS
+```
