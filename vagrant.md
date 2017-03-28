@@ -115,39 +115,334 @@ module VagrantPlugins
 C:\> vagrant plugin install vagrant-windows-hyperv
 ```
 
+## Box 사전 작업
+
+### CentOS 6
+
+* 먼저 인터넷 연결 가능하도록 설정
+    * `/etc/sysconfig/network-scripts/ifcfg-ethX` 파일 수정 (초 단순 버전)
+```
+DEVICE=eth0
+NM_CONTROLLED=no
+ONBOOT=yes
+BOOTPROTO=dhcp
+```
+
+* gcc, make 설치
+```bash
+# yum -y install gcc make man perl
+```
+
+* 계정관련 작업
+    * 설치하면서 root 계정의 암호 설정: **vagrant**
+    * vagrant 계정 생성 하고 암호 설정: **vagrant**
+
+```bash
+# useradd -m -s /bin/bash vagrant
+# echo 'vagrant:vagrant' | chpasswd
+```
+
+* CoreOS에서 가져온 update-ssh-keys 스크립트를 /usr/local/sbin 경로에 복사. permission 확인 (755)
+    * vagrant 에서 사용하는 공용 키를 authorized_keys에 등록한다. (update-ssh-keys 명령을 이용하면 한 방에 가능)
+    * `/home/vagrant/.ssh` 폴더 생성. 퍼미션 700
+    * `/home/vagrant/.ssh` 폴더에 authorized_keys 파일 복사. 퍼미션 600
+    * cygwin 에서 vagrant box 원본 VM에 접속해서 *insecure_public_key* 등록할 수 있다.
+```bash
+[cygwin] giseong.eom@GiSeong-PC ~
+$ cat ~/.ssh/insecure_public_key | ssh vagrant@192.168.98.106 \
+  "/usr/local/sbin/update-ssh-keys -a vagrant"
+
+vagrant@192.168.98.106's password:
+Adding/updating vagrant:
+2048 dd:3b:b8:2e:85:04:06:e9:ab:ff:a8:0a:c0:04:6e:d6 /home/vagrant/.ssh/authorized_keys.d/vagrant.vAZs8WwGQh (RSA)
+Updated /home/vagrant/.ssh/authorized_keys
+```
+
+* root 계정의 EDITOR 환경변수 설정 (/root/.bashrc 수정) `visudo` 사용해야 하므로 중요
+```
+export EDITOR=vi
+```
+한 방에 수정하기
+```bash
+echo "" >> ~/.bashrc ; echo "" >> ~/.bashrc ; echo "export EDITOR=vi" >> ~/.bashrc
+```
+
+* sudo 설정
+vagrant 사용자에게 모든 암호를 묻지 않고 바로 sudo 실행할 수 있도록 설정 
+```
+vagrant ALL=(ALL)       NOPASSWD: ALL
+```
+한 방에 수정하기
+```
+echo 'vagrant ALL=(ALL)       NOPASSWD: ALL' >> /etc/sudoers
+```
+
+* `requiretty` 주석 처리한다
+```
+#
+# Disable "ssh hostname sudo <cmd>", because it will show the password in clear.
+#         You have to run "ssh -t hostname sudo <cmd>".
+#
+#Defaults    requiretty
+```
+한 방에 수정하기
+```
+sed -i 's/^\(Defaults.*requiretty\)/#\1/' /etc/sudoers
+```
+
+
+* 기타 설정
+    * sshd 설정 (/etc/ssh/sshd_config 수정)
+```
+UseDNS no
+```
+
+* 추가 패키지 설치
+    * VMware Tools 설치 - VMware Provider 환경에서는 필수
+    * hypervkvpd - Hyper-V Provider 환경에서는 필수
+CentOS 7 에서는 설치 후 enabled 설정 필요함
+```
+# systemctl status hypervkvpd
+```
+    * gcc, make, man, perl - VMware Tools 패키지 설지할 때 필요할 수 있음
+    * vim
+    * rsync
+    * openssh-clients (scp 사용하려면 필수)
+    * redhat-lsb
+    * chef
+```bash
+curl -L https://www.opscode.com/chef/install.sh | sudo bash
+```
+    * puppet
+```bash
+rpm -ivh http://yum.puppetlabs.com/puppetlabs-release-el-6.noarch.rpm
+yum install puppet
+```
+
+
+* ethX 디바이스 넘버 변경되지 않도록 설정
+    * `/etc/udev/rules.d/70-persistent-net.rules` 파일 삭제
+
+* `shutdown !!!`
 
 
 
+### CentOS 7
+
+* 설치할 때 인터넷 가능하도록 네트워크 설정
+
+* 설치 필요한 패키지
+    * net-tools
+    * vim
+    * redhat-lsb
+    * chef
+```bash
+curl -L https://www.opscode.com/chef/install.sh | sudo bash
+```
+  * puppet
+```
+rpm -ivh http://yum.puppetlabs.com/puppetlabs-release-el-7.noarch.rpm
+yum install puppet
+```
+
+* `shutdown !!!`
 
 
+### Ubuntu
+
+* 계정관련 작업
+    * 설치하면서 vagrant 계정을 생성한다.
+    * vagrant 계정의 암호 설정: *vagrant*
+    * weak password 라고 경고해도 무시한다.
+    * root 계정 enable
+
+```
+# usermod -U root ; echo 'root:vagrant' | chpasswd
+```
+    * root 계정의 암호 설정: *vagrant*
+    * CoreOS에서 가져온 update-ssh-keys 스크립트를 /usr/local/sbin 경로에 복사. permission 확인 (755)
+    * vagrant 에서 사용하는 공용 키를 authorized_keys에 등록한다. (update-ssh-keys 명령을 이용하면 한 방에 가능)
+    * root 계정의 EDITOR 환경변수 설정 (/root/.bashrc 수정) *visudo* 사용해야 하므로 중요
+```bash
+export EDITOR=vi
+```
+    * 한 방에 수정하기
+```bash
+# echo "" >> ~/.bashrc ; echo "" >> ~/.bashrc ; echo "export EDITOR=vi" >> ~/.bashrc
+```
+    * sudo 설정
+    * vagrant 사용자에게 모든 암호를 묻지 않고 바로 sudo 실행할 수 있도록 설정 
+```bash
+vagrant ALL=(ALL)       NOPASSWD: ALL
+```
+한 방에 수정
+```bash
+echo 'vagrant ALL=(ALL)       NOPASSWD: ALL' >> /etc/sudoers
+```
+
+* 기타 설정
+sshd 설정 `/etc/ssh/sshd_config` 수정
+```
+UseDNS no
+```
+한 방에 수정
+```
+echo 'UseDNS no' >> /etc/ssh/sshd_config
+```
+
+* 추가 패키지 설치 
+    * chef
+```
+$ curl -L https://www.opscode.com/chef/install.sh | sudo bash
+$ chef-client -v
+Chef: 12.0.3
+```
+    * Ubuntu 14.04.1 (32-bit)에서 chef 설치후 오류. 그래서, puppet만 설치함
+    * puppet
+```
+$ wget https://apt.puppetlabs.com/puppetlabs-release-pc1-`lsb_release -c -s`.deb
+$ sudo dpkg -i puppetlabs-release-pc1-`lsb_release -c -s`.deb
+$ sudo apt-get update
+$ sudo apt-get -y install puppet-agent
+$ /opt/puppetlabs/bin/puppet -V
+```
+
+* ethX 디바이스 넘버 변경되지 않도록 설정
+    * `/etc/udev/rules.d/70-persistent-net.rules` 파일 삭제
+
+* `shutdown !!!`
 
 
+### Microsoft Windows 
 
+* gpedit.msc 이용
+    * Turn off UAC (Msconfig) : Server Core 옵션으로 변경하면 자동 반영됨
+    * Disable complex passwords
+    * Disable Shutdown Event Tracker
+* Create a vagrant user, for things to work out of the box username and password should both be "vagrant".
+```batch
+net user vagrant vagrant /ADD
+net localgroup Administrators vagrant /add
+```
 
+* Enable and configure WinRM
+```powershell
+PS C:\Users\Administrator> Enable-PSRemoting -Verbose -Force -SkipNetworkProfileCheck
 
+WinRM is already set up to receive requests on this computer.
+WinRM has been updated for remote management.
+Configured LocalAccountTokenFilterPolicy to grant administrative rights remotely to local users.
+```
+* WinRM 기본값 수정 (2012 R2 기준)
+```
+   winrm set winrm/config @{MaxTimeoutms="1800000"}
+   winrm set winrm/config/service @{AllowUnencrypted="true"}
+   winrm set winrm/config/service/auth @{Basic="true"}
+```
+* FQDN이 아닌 이름/IP로 Remote Machine 연결을 허용 (Client side)
+```powershell
+# 모든 머신으로 Outgoing 접속 허용
+Set-Item wsman:localhost\client\trustedhosts -Value * -Force
+```
 
+* Windows SmartScreen 설정 활성화(gpedit.msc)
+```
+- Computer Configuration > Administrative Templates > Windows Components > File Explorer
+- Configure Windows SmartScreen - Enabled
+```
 
+* IE Enhanced Security Configuration: Off
+* Windows Firewall and Advanced Security: 그룹 단위로 허용한다.
+    * Remote Desktop: Enabled
+    * File and Printer Sharing: Enabled
+    * File and Printer Sharing: Windows Remote Management
 
+* chef 설치
+    * Chef Client | Chef Downloads | Chef 방문 `https://www.chef.io/download-chef-client/`
+    * Windows Server 2012 R2 버전 다운로드: chef-client-12.0.3-1.msi
+    * Service 관련 컴포넌트도 설치
+    * Service 시작 유형을 `Manual Type` 으로 지정
 
+* puppet 설치
+    * Puppet Labs Windows packages Download 방문 - https://downloads.puppetlabs.com/windows/
+    * 최신 64-bit 버전 다운로드: puppet-latest.msi
+    * Service 시작 유형을 `Manual Type` 으로 지정
 
+* builtin\Administrator 계정의 암호 만료되지 않도록 설정
+    * C:\Windows\Setup\Scripts 폴더에 SetupComplete.cmd 파일 생성하고 아래 내용을 저장
+```batch
+@echo off
+REM set builtin-administrator password not expired
+c:\Windows\System32\wbem\WMIC.exe USERACCOUNT WHERE "Name='Administrator'" set PasswordExpires=FALSE
+```
+* vagrant 계정의 경우는 wmic 명령으로 미리 설정해 둔다. (sysprep 과정에서 그대로 유지됨)
 
+#### Server Core
 
+* secedit 명령으로 Security Configuration 덤프
+```batch
+secedit.exe /export /cfg c:\Windows\temp\sec-config.cfg
+```
+* PasswordComplexity 값을 1 에서 `0` 으로 수정
+```batch
+notepad c:\Windows\temp\sec-config.cfg
+  "PasswordComplexity = 0"
+```
+* 수정한 설정을 new.sdb 파일에 반영
+```batch
+secedit.exe /configure /db c:\Windows\security\new.sdb /cfg c:\Windows\Temp\sec-config.cfg /areas SECURITYPOLICY
+```
+* 계정의 암호만료설정을 해제하고, vagrant 계정을 생성(동시에 Administraotrs 그룹에 추가), Administrator 계정의 암호를 `vagrant` 로 변경함
+```batch
+net accounts /MAXPWAGE:UNLIMITED
+net user vagrant vagrant /ADD
+net localgroup Administrators vagrant /add
+net user administrator vagrant
+```
+* PowerShell Remoting 관련 환경설정
+```powershell
+powershell -ExecutionPolicy Bypass -command "& {Enable-PSRemoting -SkipNetworkProfileCheck -Force}"
+powershell -ExecutionPolicy Bypass -command "& {Set-Item wsman:localhost\client\trustedhosts -Value * -Force}"
 
+winrm set winrm/config/service @{AllowUnencrypted="true"}
+winrm set winrm/config/service/auth @{Basic="true"}
+winrm set winrm/config/client @{AllowUnencrypted="true"}
+winrm set winrm/config/client/auth @{Basic="true"}
+```
+* Telnet-Client 설치
+```
+dism /online /enable-feature:TelnetClient
+```
+* chocolatey 설치
+```powershell
+powershell -NoProfile -ExecutionPolicy Bypass -Command "iex ((new-object net.webclient).DownloadString('https://chocolatey.org/install.ps1'))" && SET PATH=%PATH%;%ALLUSERSPROFILE%\chocolatey\bin
+```
+* Remote Desktop
+    * sconfig 실행
+    * Enable RemoteDesktop
+    * Disable NLA (Network Level Authentication - all clients) 선택
+    * RemoteDesktop 관련 방화벽 추가 설정
+```
+netsh advfirewall firewall set rule group="remote desktop" new enable=Yes
+```
+* Chef/Puppet 다운로드
+```powershell
+start powershell -ExecutionPolicy Bypass -command "& {Invoke-WebRequest -Uri https://downloads.puppetlabs.com/windows/puppet-agent-1.2.1-x64.msi -OutFile C:\Windows\Temp\puppet.msi}"
+start powershell -ExecutionPolicy Bypass -command "& {Invoke-WebRequest -Uri https://opscode-omnibus-packages.s3.amazonaws.com/windows/2008r2/x86_64/chef-client-12.4.0-1.msi -OutFile C:\Windows\Temp\chef.msi}
 
+powershell -ExecutionPolicy Bypass -command "& {Set-Service puppet -StartupType Manual}
+powershell -ExecutionPolicy Bypass -command "& {Set-Service chef-client -StartupType Manual}
 
+del /q /f c:\windows\temp\*.msi
+del /q /f c:\Windows\Temp\sec-config.cfg
+```
+    * Interactive 설치
+    * C:\Windows\Temp\puppet.msi
+    * C:\Windows\Temp\chef.msi
+    * 서비스 시작유형 변경
+    * 파일 삭제
 
-
-
-
-
-
-
-
-
-
-
-
-
+* 전체작업과정을 정리: WS2012R2-ServerCore-CreateBox.txt 참고
 
 
 
