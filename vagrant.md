@@ -114,3 +114,59 @@ module VagrantPlugins
 ```
 C:\> vagrant plugin install vagrant-windows-hyperv
 ```
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+## 참고자료
+
+* [CREATING A BASE BOX](http://docs.vagrantup.com/v2/boxes/base.html)
+* [VMware - CREATING A BASE BOX](https://docs.vagrantup.com/v2/vmware/boxes.html)
+* [Hyper-V - CREATING A BASE BOX](http://docs.vagrantup.com/v2/hyperv/boxes.html)
+* [Vagrant Windows Hyper-V Provider](https://github.com/MSOpenTech/vagrant-windows-hyperv)
+* [Vagrant Windows Hyper-V Provider (deprecated)](https://github.com/WinRb/vagrant-windows)
+* [How to disable the Shutdown Event Tracker in Server 2003/2008](http://www.jppinto.com/2010/01/how-to-disable-the-shutdown-event-tracker-in-server-20032008/)
+* [Docs » Installing Puppet: Debian and Ubuntu](https://docs.puppetlabs.com/guides/install_puppet/install_debian_ubuntu.html#supported-versions)
+* [Docs » Installing Puppet: Red Hat Enterprise Linux (and Derivatives)](https://docs.puppetlabs.com/guides/install_puppet/install_el.html)
+* [give a chance to disable default ssh port forwarding (mitchellh/vagrant)](https://github.com/mitchellh/vagrant/issues/1922)
+* [base_mac is totally undocumented](https://github.com/mitchellh/vagrant/issues/3609)
+* [Issue with base_mac](https://groups.google.com/forum/#!topic/vagrant-up/-2OSsEITs_w)
+* [Shell Scripts - Provisioning - Vagrant Documentation](https://docs.vagrantup.com/v2/provisioning/shell.html)
+* [Enable Remote Desktop for Windows Server 2012 R2 Core](http://www.packet6.com/unable-to-remote-desktop-into-windows-server-2012-r2-core/)
+* [How to disable Password complexity on Server Core installations](http://servercore.net/index.php/2014/01/how-to-disable-password-complexity-on-server-core-installations)
+* [Windows 7: Password Expiration - Change MAX and MIN Password Age](http://www.sevenforums.com/tutorials/73224-password-expiration-change-max-min-password-age.html)
+* [SecEdit](https://technet.microsoft.com/en-us/library/bb490997.aspx?f=255&MSPPError=-2147217396)
