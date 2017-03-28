@@ -255,14 +255,14 @@ yum install puppet
     * vagrant 계정의 암호 설정: *vagrant*
     * weak password 라고 경고해도 무시한다.
     * root 계정 enable
-
-```
+```bash
 # usermod -U root ; echo 'root:vagrant' | chpasswd
 ```
-    * root 계정의 암호 설정: *vagrant*
+
+    * root 계정의 암호 설정: `vagrant`
     * CoreOS에서 가져온 update-ssh-keys 스크립트를 /usr/local/sbin 경로에 복사. permission 확인 (755)
     * vagrant 에서 사용하는 공용 키를 authorized_keys에 등록한다. (update-ssh-keys 명령을 이용하면 한 방에 가능)
-    * root 계정의 EDITOR 환경변수 설정 (/root/.bashrc 수정) *visudo* 사용해야 하므로 중요
+    * root 계정의 EDITOR 환경변수 설정 (/root/.bashrc 수정) `visudo` 사용해야 하므로 중요
 ```bash
 export EDITOR=vi
 ```
