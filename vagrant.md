@@ -292,14 +292,15 @@ echo 'UseDNS no' >> /etc/ssh/sshd_config
 
 * 추가 패키지 설치 
     * chef
-```
+```bash
 $ curl -L https://www.opscode.com/chef/install.sh | sudo bash
 $ chef-client -v
 Chef: 12.0.3
 ```
+
     * Ubuntu 14.04.1 (32-bit)에서 chef 설치후 오류. 그래서, puppet만 설치함
     * puppet
-```
+```bash
 $ wget https://apt.puppetlabs.com/puppetlabs-release-pc1-`lsb_release -c -s`.deb
 $ sudo dpkg -i puppetlabs-release-pc1-`lsb_release -c -s`.deb
 $ sudo apt-get update
