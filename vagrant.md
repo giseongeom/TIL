@@ -573,3 +573,7 @@ vagrant box add awsbox https://github.com/mitchellh/vagrant-aws/raw/master/dummy
 * [How to disable Password complexity on Server Core installations](http://servercore.net/index.php/2014/01/how-to-disable-password-complexity-on-server-core-installations)
 * [Windows 7: Password Expiration - Change MAX and MIN Password Age](http://www.sevenforums.com/tutorials/73224-password-expiration-change-max-min-password-age.html)
 * [SecEdit](https://technet.microsoft.com/en-us/library/bb490997.aspx?f=255&MSPPError=-2147217396)
+
+## 기타
+
+* 2015년 자료
