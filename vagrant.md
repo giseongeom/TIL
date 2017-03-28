@@ -522,7 +522,37 @@ end
 ```
 
 
+## Box 추가
 
+* .box 파일을 현재 $HOME/.vagrant.d/boxes에 추가
+```
+C:\Users\giseong.eom>vagrant box add --name ubuntuserver14.04_64 c:\vmstore\ubuntuserver14.04_64.box
+==> box: Adding box 'ubuntuserver14.04_64' (v0) for provider:
+    box: Downloading: file://c:/vmstore/ubuntuserver14.04_64.box
+    box: Progress: 100% (Rate: 797M/s, Estimated time remaining: --:--:--)
+==> box: Successfully added box 'ubuntuserver14.04_64' (v0) for 'hyperv'!
+```
+
+* Windows 머신에서 로컬/네트워크 드라이브의 .box를 추가하는 방법 (.box 경로 지정하는 부분에 주의할 것)
+```
+C:\>vagrant box add --name=WS2012R2 file:///m:/Backup.VM/Vagrant/Box/hyperv/WindowsServer2012R2Datacenter_hyperv.box
+==> box: Adding box 'WS2012R2' (v0) for provider:
+    box: Downloading: file:///m:/Backup.VM/Vagrant/Box/hyperv/WindowsServer2012R2Datacenter_hyperv.box
+    box: Progress: 100% (Rate: 88.9M/s, Estimated time remaining: --:--:--)
+==> box: Successfully added box 'WS2012R2' (v0) for 'hyperv'!
+```
+
+## vagrant-aws plugin
+
+* plugin 설치
+```
+vagrant plugin install vagrant-aws
+```
+
+* dummy box 추가 - Github에서 다운로드
+```
+vagrant box add awsbox https://github.com/mitchellh/vagrant-aws/raw/master/dummy.box
+```
 
 
 ## 참고자료
