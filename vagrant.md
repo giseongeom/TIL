@@ -255,26 +255,25 @@ yum install puppet
     * vagrant 계정의 암호 설정: *vagrant*
     * weak password 라고 경고해도 무시한다.
     * root 계정 enable
-```bash
-# usermod -U root ; echo 'root:vagrant' | chpasswd
-```
-
     * root 계정의 암호 설정: `vagrant`
     * CoreOS에서 가져온 update-ssh-keys 스크립트를 /usr/local/sbin 경로에 복사. permission 확인 (755)
     * vagrant 에서 사용하는 공용 키를 authorized_keys에 등록한다. (update-ssh-keys 명령을 이용하면 한 방에 가능)
     * root 계정의 EDITOR 환경변수 설정 (/root/.bashrc 수정) `visudo` 사용해야 하므로 중요
 ```bash
-export EDITOR=vi
+# usermod -U root ; echo 'root:vagrant' | chpasswd
+# export EDITOR=vi
 ```
-    * 한 방에 수정하기
+
+한 방에 수정하기
 ```bash
 # echo "" >> ~/.bashrc ; echo "" >> ~/.bashrc ; echo "export EDITOR=vi" >> ~/.bashrc
 ```
-    * sudo 설정
-    * vagrant 사용자에게 모든 암호를 묻지 않고 바로 sudo 실행할 수 있도록 설정 
+
+sudo 설정 - vagrant 사용자에게 모든 암호를 묻지 않고 바로 sudo 실행할 수 있도록 설정 
 ```bash
 vagrant ALL=(ALL)       NOPASSWD: ALL
 ```
+
 한 방에 수정
 ```bash
 echo 'vagrant ALL=(ALL)       NOPASSWD: ALL' >> /etc/sudoers
@@ -282,11 +281,12 @@ echo 'vagrant ALL=(ALL)       NOPASSWD: ALL' >> /etc/sudoers
 
 * 기타 설정
 sshd 설정 `/etc/ssh/sshd_config` 수정
-```
+```bash
 UseDNS no
 ```
+
 한 방에 수정
-```
+```bash
 echo 'UseDNS no' >> /etc/ssh/sshd_config
 ```
 
@@ -442,7 +442,7 @@ del /q /f c:\Windows\Temp\sec-config.cfg
     * 서비스 시작유형 변경
     * 파일 삭제
 
-* 전체작업과정을 정리: WS2012R2-ServerCore-CreateBox.txt 참고
+* 전체작업과정을 정리: [WS2012R2-ServerCore-CreateBox.txt](https://github.com/giseongeom/TIL/blob/master/vagrant/WS2012R2-ServerCore-CreateBox.txt) 참고
 
 
 
