@@ -5,6 +5,7 @@
 
 * Default Web Site의 Home 경로를 D:\ProjectRoot로 변경
 ```PowerShell
+Import-Module WebAdministration
 set-ItemProperty 'IIS:\Sites\Default Web Site' -Name PhysicalPath -Value D:\ProjectRoot
 ```
 
@@ -14,6 +15,7 @@ set-ItemProperty 'IIS:\Sites\Default Web Site' -Name PhysicalPath -Value D:\Proj
 
 * `.ini` 확장자를 추가
 ```PowerShell
+Import-Module WebAdministration
 Add-webconfigurationproperty `
  -PSPath MACHINE/WEBROOT/APPHOST `
  -Filter system.webServer/staticContent `
@@ -23,11 +25,13 @@ Add-webconfigurationproperty `
 
 * `.ini` 확장자가 추가되었는지 확인
 ```PowerShell
+Import-Module WebAdministration
 (Get-WebConfiguration -PSPath 'MACHINE/WEBROOT/APPHOST' //staticcontent).collection  | ? {$_.fileextension -eq '.ini'}
 ```
 
 * `.ini` 확장자를 삭제
 ```PowerShell
+Import-Module WebAdministration
 Remove-webconfigurationproperty `
  -PSPath MACHINE/WEBROOT/APPHOST `
  -Filter system.webServer/staticContent `
@@ -40,6 +44,7 @@ Remove-webconfigurationproperty `
 
 * `.ini` 확장자를 추가
 ```PowerShell
+Import-Module WebAdministration
 Add-webconfigurationproperty `
  -PSPath 'MACHINE/WEBROOT/APPHOST/Default Web Site' `
  -Filter system.webServer/staticContent `
@@ -49,11 +54,13 @@ Add-webconfigurationproperty `
 
 * `.ini` 확장자가 추가되었는지 확인
 ```PowerShell
+Import-Module WebAdministration
 (Get-WebConfiguration -PSPath 'MACHINE/WEBROOT/APPHOST/Default Web Site' //staticcontent).collection  | ? {$_.fileextension -eq '.ini'}
 ```
 
 * `.ini` 확장자를 삭제
 ```PowerShell
+Import-Module WebAdministration
 Remove-webconfigurationproperty `
  -PSPath 'MACHINE/WEBROOT/APPHOST/Default Web Site' `
  -Filter system.webServer/staticContent `
