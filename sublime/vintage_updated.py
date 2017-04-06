@@ -672,11 +672,11 @@ class ExitInsertMode(sublime_plugin.TextCommand):
 
         # Call after end_edit(), to ensure the final entry in the glued undo
         # group is 'exit_insert_mode'.
-	#import ctypes
-        #ctypes.windll.user32.keybd_event(0x5b, 0, 0, 0) # Win'key is down
-        #ctypes.windll.user32.keybd_event(0x20, 0, 0, 0) # Space'key is down
-        #ctypes.windll.user32.keybd_event(0x20, 0, 0x0002, 0) # Space'key is up
-        #ctypes.windll.user32.keybd_event(0x5b, 0, 0x0002, 0) # Win'key is up
+	import ctypes
+        ctypes.windll.user32.keybd_event(0x5b, 0, 0, 0) # Win'key is down
+        ctypes.windll.user32.keybd_event(0x20, 0, 0, 0) # Space'key is down
+        ctypes.windll.user32.keybd_event(0x20, 0, 0x0002, 0) # Space'key is up
+        ctypes.windll.user32.keybd_event(0x5b, 0, 0x0002, 0) # Win'key is up
         self.view.run_command('glue_marked_undo_groups')
 
     def run(self, edit):

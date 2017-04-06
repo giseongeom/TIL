@@ -30,4 +30,5 @@ class ExitInsertMode(sublime_plugin.TextCommand):
 
 ## 참고자료
 
-* [수정된 vintage.py 파일](./vintage.py)
+* [원본 vintage.py 파일](./vintage.py)
+* [수정된 vintage.py 파일](./vintage_updated.py)
