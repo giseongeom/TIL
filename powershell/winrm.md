@@ -18,7 +18,7 @@ Set-ItemProperty -Name LocalAccountTokenFilterPolicy -Path HKLM:\SOFTWARE\Micros
 
 ## TrustedHosts
 
-* FQDN이 아닌 이름/IP로 Remote Machine 연결을 허용 (Client side)
+* FQDN이 아닌 Hostname/IP로 Remote Machine 연결을 허용 (Client side)
 ```powershell
 # TrustedHosts 설정 확인 (기본값은 none)
 Get-Item wsman:\localhost\Client\TrustedHosts
