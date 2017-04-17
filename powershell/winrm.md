@@ -2,7 +2,7 @@
 
 ## LocalAccountTokenFilterPolicy
 
-* 관리자 그룹에 속한 로컬 그룹의 계정으로 Remote Session 연결을 허용/거부 (차단이 기본값임)
+* 관리자 그룹에 속한 로컬 그룹의 계정으로 Remote Session 연결을 허용 (차단이 기본값임)
 ```powershell
 # View LocalAccountTokenFilterPolicy configuration
 get-ItemProperty -Name LocalAccountTokenFilterPolicy -Path HKLM:\SOFTWARE\Microsoft\Windows\CurrentVersion\Policies\System
