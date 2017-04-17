@@ -29,8 +29,16 @@ Set-Item wsman:localhost\client\trustedhosts -Value * -Force
 
 ## CredSSP 설정
 
-* 관리자 권한으로 실행. Role은 Client로 가정
+### Workstation
+
+* 관리자 권한으로 실행. Role은 Client
 ```powershell
 Enable-WSManCredSSP -Role Client -DelegateComputer * -Verbose
 ```
 
+### Server
+
+* 관리자 권한으로 실행. Role은 Server
+```powershell
+Enable-WSManCredSSP -Role Server -Verbose
+```
