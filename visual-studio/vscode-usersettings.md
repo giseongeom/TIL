@@ -3,7 +3,7 @@
 
 * Windows 버전은 `ctrl+,` 실행하면 호출 가능
 * 내가 사용하는 설정
-```json
+```javascript
 // Place your settings in this file to overwrite the default settings
 {
     // Controls the font family.
