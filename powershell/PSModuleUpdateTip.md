@@ -4,6 +4,8 @@
 ## 설치된 Module 정보 확인 / 구버전 삭제
 ```powershell
 Get-InstalledModule | ft -AutoSize
+
+$my_psmodule_installed = Get-InstalledModule
 foreach ($module in $my_psmodule_installed) {
   Get-InstalledModule -Name $module.Name -AllVersions | 
   ? { $_.Version -ne $module.Version } | 
