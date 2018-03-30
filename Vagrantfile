@@ -21,6 +21,7 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
   config.vm.synced_folder ".", "/wiki"
   config.vm.hostname = "wiki.local"
   config.vm.network :forwarded_port, guest: 4567, host: 4567
+  config.vm.network :forwarded_port, guest: 2375, host: 2375, disabled: true
 
   config.vm.provider "virtualbox" do |vb|
      # Don't boot with headless mode
