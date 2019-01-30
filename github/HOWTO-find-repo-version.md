@@ -51,6 +51,12 @@ $ curl -s https://api.github.com/repos/hashicorp/terraform/releases/latest | jq 
 0.7.12
 ```
 
+* prerelease가 아닌 ``정식 버전``만 받고 싶을 때
+```
+$ curl -s https://api.github.com/repos/hashicorp/terraform/releases/latest | jq 'if .prerelease == false then .tag_name  else "-1" end | ltrimstr("v")' | jq -r
+0.11.11
+```
+
 ### ``latest`` Tag가 없는 경우
 * 개발자 취향에 따라 latest Tag를 안쓰는 저장소도 있다.
 * ``mitchellh/vagrant`` 저장소를 예제로 사용한다.
