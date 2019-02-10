@@ -23,3 +23,7 @@ Install-ADDSForest `
 -SysvolPath "C:\Windows\SYSVOL" `
 -Force:$true
 ```
+
+## 참고자료
+
+* [Install-ADDSForest / module addsdeployment](https://docs.microsoft.com/en-us/powershell/module/addsdeployment/install-addsforest?view=win10-ps)
