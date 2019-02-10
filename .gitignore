@@ -62,3 +62,6 @@ terraform.tfvars
 # vagrant
 *.vagrant/
 
+# ruby
+.bundle/
+Gemfile.lock
