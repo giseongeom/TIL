@@ -25,3 +25,19 @@ az ad sp create-for-rbac -n tech_support-prod --role reader
 ```bash
 az ad sp create-for-rbac -n tech_support-prod --skip-assignment
 ```
+
+
+## Role Assignment
+
+### 예제
+examplerg 리소스 그룹 수준에서 `Virtual Machine Contributor` Role 할당
+```bash
+az role assignment create --assignee 12345678 --role 'Virtual Machine Contributor' -g examplerg
+```
+
+subscription 아래의 특정한 리소스 수준에서 `Contributor` Role 할당
+```bash
+az role assignment create --assignee 12345678 --role 'Contributor' \
+--scope /subscriptions/1234/resourceGroups/exampleRg/providers/Microsoft
+.ContainerRegistry/registries/trcsplatform
+```
