@@ -65,3 +65,6 @@ terraform.tfvars
 # ruby
 .bundle/
 Gemfile.lock
+
+# python
+pythonenv3.8/
